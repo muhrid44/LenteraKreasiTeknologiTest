@@ -1,0 +1,32 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.form-login-text {
+    font-size: 32px;
+}
+
+.horizontal-line-form-login {
+    color: black;
+    height: 2px !important;
+}
+
+.labeling {
+    margin-right: 5px;
+    margin-bottom: 5px;
+}

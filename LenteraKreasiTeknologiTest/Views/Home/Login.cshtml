@@ -1,0 +1,44 @@
+﻿@model LoginModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "_LoginLayout";
+}
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - LenteraKreasiTeknologiTest</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/LenteraKreasiTeknologiTest.styles.css" asp-append-version="true" />
+</head>
+
+<div class="p-5 d-flex justify-content-center">
+    <div>
+        <div style="width: 500px;" class="">
+            <div class="font-weight-bold form-login-text">Form Login</div>
+        </div>
+        <hr class="horizontal-line-form-login" />
+    <form asp-action="Login">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group d-flex align-items-start flex-column" style="margin-bottom:20px;">
+                <label asp-for="Name" class="control-label labeling"></label>
+                <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+            <div class="form-group d-flex align-items-start flex-column" style="margin-bottom:20px;">
+                <label asp-for="Password" class="control-label labeling"></label>
+                <input asp-for="Password" class="form-control" type="password"/>
+                <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+            <div class="form-group justify-content-center">
+            <input type="submit" value="Login" class="btn btn-primary" />
+        </div>
+    </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

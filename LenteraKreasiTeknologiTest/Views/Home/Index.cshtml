@@ -1,0 +1,128 @@
+﻿@using System.Globalization
+@model LenteraKreasiTeknologiTest.Models.IndexEmployeeListModelView
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-left mb-4">
+    <h1 class="display-6">Form List Data Karyawan</h1>
+    <hr />
+</div>
+
+<div class="mb-4">
+    <form asp-controller="Home" asp-action="Index" method="get">
+        <div class="d-flex justify-content-between">
+            <div>
+                <span> Nama</span>
+                <input type="text" name="Name" />
+            </div>
+            <div>
+                <span> Departement</span>
+                @Html.DropDownList(
+                         "Department",
+                         new SelectList(
+                         Model.DepartmentList.Select(x => new { Value = x.Name, Text = x.Name }),
+                         "Value",
+                         "Text"
+                         ),
+                         "Select a department"
+                         )
+            </div>
+            <div>
+                <span> Departement</span>
+                @Html.DropDownList(
+                         "Jabatan",
+                         new SelectList(
+                         Model.JabatanList.Select(x => new { Value = x.Name, Text = x.Name }),
+                         "Value",
+                         "Text"
+                         ),
+                         "Select a jabatan"
+                         )
+            </div>
+            <div>
+                <span> Gender</span>
+                @Html.DropDownList("Gender", new List<SelectListItem>
+                {
+                new SelectListItem { Text = "Select a gender", Value = "" },
+                new SelectListItem { Text = "Laki-Laki", Value = "Laki-Laki" },
+                new SelectListItem { Text = "Perempuan", Value = "Perempuan" },
+                })
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+
+        </div>
+
+    </form>
+    <hr />
+
+
+    <div class="text-left mb-4">
+        <input type="button" class="btn btn-primary" value="Add" onclick="location.href='@Url.Action("Create", "Home")'" />
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeList[0].Nik)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeList[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeList[0].Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeList[0].BirthDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeList[0].Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeList[0].Departement)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeList[0].Jabatan)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.EmployeeList)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nik)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BirthDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Departement)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Jabatan)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Nik">Edit</a> |
+                    <form asp-action="Delete" method="post" style="display:inline;">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="nik" value="@item.Nik" />
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this karyawan?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
